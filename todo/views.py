@@ -5,4 +5,4 @@ from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 
 def todoView(request):
-    render(request, 'todo.html')
+    return render(request, 'todo.html')
