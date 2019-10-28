@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('todo/', todoView),
     path('addTodo/', addTodo),
-    path('deleteTodo/<int:todo_id>/', delete_todo),
+    path('deleteTodo/<int:todo_id>/', deleteTodo),
 
 ]
