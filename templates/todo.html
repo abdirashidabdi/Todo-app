@@ -7,15 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>this is todo page</h1>
+    <h1>This is todo page</h1>
     <ul>
-        <li>parmanent todo A</li>
-        <li>parmenent todo B</li>
-        <li>parmanent todo C</li>
+        {% for todo_items in all_items %}
+        <li>{{ todo_items.content }}
+            <form action="/delete_todo/{{ todo_item.id }}"method="post" style="display: inline">{% csrf_token %}
+                <button type="submit" value="delete">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
     </ul>
-    <form action="">
-        <input  type="text" placeholder=" Add task">
-        <button type="submit">Add</button>
+
+    <form action="/addTodo/"method="post">{% csrf_token %}
+        <input  type="text" name="content" placeholder=" Add task">
+        <button type="submit" value="Add">Add</button>
     </form>
 </body>
 </html>
