@@ -11,7 +11,7 @@
     <ul>
         {% for todo_items in all_items %}
         <li>{{ todo_items.content }}
-            <form action="/delete_todo/{{ todo_item.id }}"method="post" style="display: inline">{% csrf_token %}
+            <form action="/deleteTodo/{{ todo_items.id }}/"method="post" style="display: inline">{% csrf_token %}
                 <button type="submit" value="delete">Delete</button>
             </form>
         </li>
