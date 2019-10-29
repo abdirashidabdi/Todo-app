@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>To do list App</title>
+
+    <style>
+        body {
+  /* background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); */
+  /* background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); */
+  margin: 0;
+  padding: 0;
+  background: #025AFF;
+  overflow-x: hidden;
+}
+.main_container {
+  /* background: #ff0090; */
+  /* padding: 100px; */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.header_section {
+  background: rgba(0, 0, 0, 0.116);
+  padding: 35px;
+}
+.header_section .fas {
+  color:rgba(255, 0, 0, 0.685);
+  /* background: rgb(67, 175, 175); */
+  padding: 8px;
+}
+.header_section h1 {
+  color: aliceblue;
+  font-family: Helvetica, sans-serif;
+}
+.input_container {
+  /* background: #04FDED; */
+  padding: 35px;
+  width: 100%;
+}
+.input_container input {
+  background: none;
+  border: none;
+  border-bottom: 2px solid rgba(2, 198, 247, 0.322);
+  width: 50%;
+  padding: 10px;
+  outline: none;
+  font-size: 25px;
+  color: azure;
+}
+
+.input_container input:focus{
+    border-bottom-color: rgb(6, 185, 185);
+}
+.input_container button {
+  padding: 10px;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.input_container input::placeholder {
+  font-size: 25px;
+  color: rgb(253, 228, 242);
+}
+.input_container .fas {
+  color: rgba(255, 255, 255, 0.336);
+}
+.input_container .fas:hover{
+    color: aliceblue;
+}
+
+/* ------------ */
+.list_container {
+  /* background: #04FDED; */
+  /* width: 100%; */
+  height: 50vh;
+  padding: 40px;
+
+}
+.list_container li {
+  border-radius: 8px ;
+  background: rgba(255, 0, 0, 0.685);
+  {#/* padding: 25px 55px 25px 20px ; */#}
+  margin-top: 10px;
+  list-style: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+.list_container ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+
+.trash-icon .far,.check-icon .far {
+    color: rgba(240, 255, 255, 0.349);
+    padding: 20px;
+}
+.trash-icon .far:hover,.check-icon .far:hover {
+    color: azure;
+    padding:15px;
+}
+.remove_item{
+    text-decoration: line-through;
+    font-weight: 100;
+    color: rgba(240, 255, 255, 0.226);
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: uppercase;
+}
+.deleted_item  .far:hover{
+    color: white;
+    padding:15px;
+}
+.deleted_item  .far{
+    color: rgb(7, 253, 7);
+    padding:15px;
+}
+
+.list_container .deleted_item{
+   background:rgba(0, 128, 0, 0.329);
+}
+.list_container h2{
+    color: azure;
+}
+.error_msg, .successful_msg{
+  font-size: 25px;
+  border-bottom: 1px dashed rgba(206, 93, 115, 0.664);
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.error_msg {
+color: rgb(255, 27, 27);
+}
+.successful_msg{
+color: rgb(2, 253, 2);
+}
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="http://127.0.0.1:8000">Todo App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ">
+      <li class="nav-item active ">
+        <a class="nav-link" href="http://127.0.0.1:8000">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Todo App</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+    <div class="main_container">
+      <div class="header_section">
+        <h1>TO DO <i class="fas fa-clipboard-list fa-2x"></i> LIST APP</h1>
+      </div>
+      <p class="error_msg successful_msg" id="output-msg"></p>
+      <!-- ---------header Ends----------------------------- -->
+      <div class="input_container">
+          <form action="/addTodo/"method="post">{% csrf_token %}
+        <input  type="text" name="content" placeholder="Note here ....." id="input"/>
+        <button type="submit" id="add-button" class="fas fa-pen fa-2x"></button>
+    </form>
+     </div>
+    </div>
+{#    <ul>#}
+{#        {% for todo_items in all_items %}#}
+{#        <li>{{ todo_items.content }}#}
+{#            <form action="/deleteTodo/{{ todo_items.id }}/"method="post" style="display: inline">{% csrf_token %}#}
+{#                <button type="submit" value="delete">Delete</button>#}
+{#            </form>#}
+{#        </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+<div class="list_container">
+        <ul id="list_content">
+          {% for todo_items in all_items %}
+        <li>{{ todo_items.content }}
+            <form action="/deleteTodo/{{ todo_items.id }}/"method="post" style="display: inline">{% csrf_token %}
+                <li>
+                    <button class="btn btn-primary btn-sm " type="submit" style="background: none;border: none;"><i class=" trash-icon fas fa-trash"></i></button>
+              <li/>
+            </form>
+        </li>
+        {% endfor %}
+        </ul>
+        <br /><br />
+        <hr />
+
+        <h2>Completed Work</h2>
+        <ul class="deleted">
+          <li class="deleted_item remove_item">
+            <span class="checked"
+              ><i class="far fa-check-circle fa-2x"></i
+            ></span>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti,
+            qui.
+          </li>
+          <li class="deleted_item remove_item">
+            <span class="checked"
+              ><i class="far fa-check-circle fa-2x"></i
+            ></span>
+            A quo quibusdam rerum iure et inventore dolores, dolore impedit!
+          </li>
+          <li class="deleted_item remove_item">
+            <span class="checked"
+              ><i class="far fa-check-circle fa-2x"></i
+            ></span>
+            Labore magnam velit perferendis sint nam reiciendis corrupti,
+            molestiae esse!bbbbbbbbbbbbbbbbbbbbbbbbbbbb
+          </li>
+          <li class="deleted_item remove_item">
+            <span class="checked"
+              ><i class="far fa-check-circle fa-2x"></i
+            ></span>
+            Eaque facilis sit quisquam placeat optio quia quas nam fugiat.
+          </li>
+        </ul>
+</div>
+</body>
+</html>

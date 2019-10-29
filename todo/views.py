@@ -3,9 +3,13 @@ from django.http import HttpResponseRedirect
 from .models import TodoItem
 
 
+def index(request):
+    return render(request, 'index.html')
+
+
 def todoView(request):
     all_todo_items = TodoItem.objects.all()
-    return render(request, 'todo.html',
+    return render(request, 'todo/todo.html',
                   {'all_items': all_todo_items})
 
 
