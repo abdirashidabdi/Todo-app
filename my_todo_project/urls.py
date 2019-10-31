@@ -19,6 +19,8 @@ from django.urls import path, include
 from todo import views
 from todo.views import todoView, addTodo, deleteTodo, index
 from django.urls import re_path
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     re_path(r'^$', views.index, name='index'),

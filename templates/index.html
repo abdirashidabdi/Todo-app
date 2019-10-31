@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Index page</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <script src="{% static 'script/main.js' %}"></script>
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -30,8 +33,10 @@
       </li>
 
     </ul>
+
+
   </div>
 </nav>
-
+ <h1>Todo App Home Page</h1>
 </body>
 </html>

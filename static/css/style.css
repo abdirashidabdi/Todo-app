@@ -1,6 +1,7 @@
 body{
-    background: aqua;
+background: aqua;
 }
 h1{
-color: black;
+color: gray;
+background: red;
 }
